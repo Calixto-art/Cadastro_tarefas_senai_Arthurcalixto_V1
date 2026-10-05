@@ -1,0 +1,331 @@
+/* ===== Variáveis CSS - facilitam o uso de temas ===== */
+:root {
+    --imagem-fundo: url("fundo-claro.jpg");
+    --gradiente-fundo: linear-gradient(134deg, #b6eaec 0%, #2c85d8 100%);
+    --fundo-cartao: rgba(255, 255, 255, 0.88);
+    --cor-texto: #2d3748;
+    --cor-primaria: #498ce4;
+    --cor-primaria-destaque: #84abdf;
+    --cor-borda: #498ce4;
+    --cor-perigo: #ff7675;
+    --cor-concluido: #a0aec0;
+}
+ 
+/* ===== Modo escuro (ativado via classe no body) ===== */
+body.modo-escuro {
+    --imagem-fundo: url("fundo-escuro.jpg");
+    --gradiente-fundo: linear-gradient(135deg, #484849 0%, #091630 100%);
+    --fundo-cartao: rgba(26, 32, 44, 0.88);
+    --cor-texto: #f7fafc;
+    --cor-borda: #4a5568;
+}
+ 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: background 0.3s, color 0.3s, border-color 0.3s;
+}
+ 
+/* A imagem fica por cima; se o arquivo não existir, o gradiente aparece */
+body {
+    background-image: var(--imagem-fundo), var(--gradiente-fundo);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+ 
+/* ===== Cartão ===== */
+.cartao-aplicacao {
+    background: var(--fundo-cartao);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    color: var(--cor-texto);
+    width: 100%;
+    max-width: 420px;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+ 
+.cabecalho-aplicacao {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+ 
+.cabecalho-aplicacao h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+ 
+.botao-icone {
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    color: var(--cor-texto);
+    cursor: pointer;
+}
+ 
+/* ===== Entrada de tarefas ===== */
+.caixa-entrada {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+ 
+input[type="text"] {
+    flex: 1;
+    padding: 12px 15px;
+    border: 2px solid var(--cor-borda);
+    border-radius: 12px;
+    outline: none;
+    font-size: 0.95rem;
+    background: transparent;
+    color: var(--cor-texto);
+}
+ 
+input[type="text"]:focus {
+    border-color: var(--cor-primaria);
+}
+ 
+input[type="text"].invalido {
+    border-color: var(--cor-perigo);
+}
+ 
+.mensagem-erro {
+    color: var(--cor-perigo);
+    font-size: 0.85rem;
+    margin: -10px 0 15px;
+}
+ 
+.mensagem-erro[hidden] {
+    display: none;
+}
+ 
+.botao-principal {
+    background: var(--cor-primaria);
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.1s, background 0.2s;
+}
+ 
+.botao-principal:hover {
+    background: var(--cor-primaria-destaque);
+    transform: translateY(-2px);
+}
+ 
+/* ===== Filtros ===== */
+.filtros {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+ 
+.botao-filtro {
+    flex: 1;
+    padding: 6px 10px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 20px;
+    background: transparent;
+    color: var(--cor-texto);
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+ 
+.botao-filtro:hover {
+    border-color: var(--cor-primaria);
+}
+ 
+.botao-filtro.ativo {
+    background: var(--cor-primaria);
+    border-color: var(--cor-primaria);
+    color: #fff;
+}
+ 
+/* ===== Lista ===== */
+.lista-tarefas {
+    list-style: none;
+    max-height: 280px;
+    overflow-y: auto;
+}
+ 
+.item-tarefa {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 12px;
+    background: var(--cor-borda);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    animation: aparecer 0.3s ease;
+}
+ 
+.item-tarefa span {
+    flex: 1;
+    cursor: pointer;
+    word-break: break-word;
+}
+ 
+.item-tarefa.concluido span {
+    text-decoration: line-through;
+    color: var(--cor-concluido);
+}
+ 
+.lista-vazia {
+    text-align: center;
+    padding: 20px 0;
+    color: var(--cor-concluido);
+    font-size: 0.9rem;
+}
+ 
+.acoes-tarefa {
+    display: flex;
+    gap: 8px;
+}
+ 
+.botao-acao {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--cor-texto);
+}
+ 
+.botao-acao.editar:hover {
+    color: var(--cor-primaria-destaque);
+}
+ 
+.botao-acao.excluir:hover {
+    color: var(--cor-perigo);
+}
+ 
+/* Campo que aparece ao editar uma tarefa */
+input.campo-edicao {
+    flex: 1;
+    padding: 4px 8px;
+    border: 2px solid var(--cor-primaria);
+    border-radius: 6px;
+    font-size: 0.95rem;
+}
+ 
+/* ===== Rodapé ===== */
+.rodape-aplicacao {
+    margin-top: 15px;
+    font-size: 0.85rem;
+    color: var(--cor-concluido);
+    text-align: center;
+}
+ 
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+ 
+/* ===== Cabeçalho: foto e título ===== */
+.identidade {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+ 
+.foto-perfil {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+ 
+.identidade h1 {
+    font-size: 1.2rem;
+}
+ 
+/* ===== Aviso de confirmação (modal) ===== */
+.modal-fundo {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 100;
+}
+ 
+.modal-fundo[hidden] {
+    display: none;
+}
+ 
+.modal {
+    background: var(--fundo-cartao);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    color: var(--cor-texto);
+    width: 100%;
+    max-width: 340px;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    animation: aparecer 0.2s ease;
+}
+ 
+.modal h2 {
+    font-size: 1.15rem;
+    margin-bottom: 8px;
+}
+ 
+.modal p {
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    word-break: break-word;
+}
+ 
+.modal-acoes {
+    display: flex;
+    gap: 10px;
+}
+ 
+.modal-acoes button {
+    flex: 1;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+ 
+.botao-cancelar {
+    background: transparent;
+    color: var(--cor-texto);
+    border: 2px solid var(--cor-borda);
+}
+ 
+.botao-perigo {
+    background: var(--cor-perigo);
+    color: #fff;
+    border: 2px solid var(--cor-perigo);
+}
+ 
+.botao-perigo:hover {
+    filter: brightness(0.92);
+}
+ 

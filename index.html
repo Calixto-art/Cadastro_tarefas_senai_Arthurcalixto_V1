@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Painel de Tarefas - SENAI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="cartao-aplicacao">
+        <header class="cabecalho-aplicacao">
+            <div class="identidade">
+                <img src="eu.jpeg" alt="Minha foto" class="foto-perfil">
+                <h1>Minhas Tarefas</h1>
+            </div>
+            <button class="botao-icone" id="botao-alterar-tema" aria-label="Alternar tema claro/escuro" title="Alternar tema">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+        </header>
+ 
+        <div class="caixa-entrada">
+            <input type="text" id="campo-tarefa" placeholder="O que vamos fazer hoje?..." maxlength="40" autocomplete="off">
+            <button class="botao-principal" id="botao-adicionar">
+                <i class="fa-solid fa-plus"></i> Adicionar
+            </button>
+        </div>
+ 
+        <p class="mensagem-erro" id="mensagem-erro" role="alert" hidden></p>
+ 
+        <div class="filtros">
+            <button class="botao-filtro ativo" data-filtro="todas">Todas</button>
+            <button class="botao-filtro" data-filtro="pendentes">Pendentes</button>
+            <button class="botao-filtro" data-filtro="concluidas">Concluídas</button>
+        </div>
+ 
+        <ul class="lista-tarefas" id="lista-tarefas">
+            <!-- As tarefas serão inseridas dinamicamente via JavaScript -->
+        </ul>
+ 
+        <footer class="rodape-aplicacao">
+            <span id="contador-tarefas">0 tarefas na lista</span>
+        </footer>
+    </div>
+ 
+    <!-- Aviso de confirmação ao excluir -->
+    <div class="modal-fundo" id="modal-confirmacao" hidden>
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
+            <h2 id="modal-titulo">Excluir tarefa?</h2>
+            <p id="modal-texto"></p>
+            <div class="modal-acoes">
+                <button class="botao-cancelar" id="modal-cancelar">Cancelar</button>
+                <button class="botao-perigo" id="modal-confirmar">Excluir</button>
+            </div>
+        </div>
+    </div>
+ 
+    <script src="script.js"></script>
+</body>
+</html>
+ 
